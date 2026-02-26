@@ -2,6 +2,8 @@
 
 A simple end-to-end **Retrieval-Augmented Generation (RAG)** example built on a real-world dataset: the [DOJ Epstein disclosure documents](https://www.justice.gov/epstein/doj-disclosures/data-set-12-files). Ask multi-round questions against declassified PDFs entirely on your local machine — no cloud LLM calls, no data leaving your device.
 
+![Demo](docs/demo.gif)
+
 ## Objective
 
 This project demonstrates a complete local RAG pipeline:
