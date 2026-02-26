@@ -1,0 +1,57 @@
+Introduction to LlamaIndex, Ollama, and Retrieval-Augmented Generation (RAG)
+
+What is LlamaIndex?
+LlamaIndex (formerly GPT Index) is an open-source data framework designed to connect large language models (LLMs) with external data sources. It provides tools for ingesting, structuring, and querying documents so that LLMs can reason over your own data rather than relying solely on their training knowledge.
+
+Key components of LlamaIndex include:
+- Document Loaders (Readers): Ingest data from files, databases, APIs, and more.
+- Node Parsers / Text Splitters: Break documents into manageable chunks (nodes) for indexing.
+- Vector Stores: Store embeddings of document chunks for fast semantic search.
+- Indices: Data structures (e.g., VectorStoreIndex) that organise nodes for efficient retrieval.
+- Query Engines: Accept natural-language questions, retrieve relevant nodes, and synthesise answers using an LLM.
+- Response Synthesisers: Combine retrieved context with the original query to produce a final answer.
+
+What is Ollama?
+Ollama is a lightweight tool that lets you run open-source large language models locally on your own machine. It provides a simple REST API that mimics the OpenAI interface, making it easy to swap cloud-based LLMs for local ones without changing application code.
+
+Popular models available through Ollama include:
+- llama3.2: Meta's Llama 3.2 family, offering strong reasoning and instruction-following.
+- mistral: Mistral AI's efficient 7B model, known for speed and quality.
+- nomic-embed-text: A purpose-built embedding model optimised for semantic search tasks.
+- phi3: Microsoft's small but capable Phi-3 model.
+
+To use Ollama you simply run `ollama serve` to start the local server and `ollama pull <model>` to download a model. The default endpoint is http://localhost:11434.
+
+What is Retrieval-Augmented Generation (RAG)?
+RAG is a technique that enhances LLM responses by first retrieving relevant information from an external knowledge base before generating an answer. Instead of relying purely on parametric memory baked into model weights, RAG allows the model to consult up-to-date or domain-specific documents at query time.
+
+A standard RAG pipeline has two phases:
+
+1. Indexing phase (offline):
+   a. Load documents from files, databases, or APIs.
+   b. Split documents into smaller chunks (nodes) for precise retrieval.
+   c. Embed each chunk into a dense vector representation using an embedding model.
+   d. Store the vectors in a vector index (e.g., in-memory FAISS or a vector database).
+
+2. Querying phase (online):
+   a. Embed the user's question using the same embedding model.
+   b. Perform a similarity search against the vector index to find the top-K most relevant chunks.
+   c. Inject the retrieved chunks as context into a prompt for the LLM.
+   d. The LLM generates an answer grounded in the retrieved context.
+
+Benefits of RAG:
+- Reduces hallucinations by grounding answers in real documents.
+- Allows the model to answer questions about data it was never trained on.
+- Easy to update: swap or add documents without retraining the model.
+- Cost-effective: smaller, cheaper models can match larger models when given good context.
+
+How LlamaIndex and Ollama Work Together:
+LlamaIndex orchestrates the full RAG pipeline (loading, splitting, embedding, indexing, querying), while Ollama supplies both the LLM for answer generation and an embedding model for vectorising document chunks and queries. Because LlamaIndex supports Ollama natively through its integration packages, the setup requires only a few lines of configuration.
+
+Typical workflow:
+1. Start Ollama: `ollama serve`
+2. Pull models: `ollama pull llama3.2 && ollama pull nomic-embed-text`
+3. Configure LlamaIndex Settings with the Ollama LLM and embedding model.
+4. Load documents with SimpleDirectoryReader.
+5. Build a VectorStoreIndex and persist it to disk.
+6. Create a query engine and ask questions in natural language.

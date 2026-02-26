@@ -1,0 +1,17 @@
+[project]
+name = "epstein-files-qna"
+version = "0.1.0"
+description = "Multi-round RAG Q&A over DOJ Epstein disclosure documents using LlamaIndex and Ollama"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "jupyterlab>=4.5.5",
+    "llama-index>=0.10.0",
+    "llama-index-embeddings-ollama>=0.8.6",
+    "llama-index-llms-ollama>=0.9.1",
+    "llama-index-readers-file>=0.5.6",
+    "matplotlib>=3.10.8",
+    "notebook>=7.5.4",
+    "playwright>=1.58.0",
+    "streamlit>=1.54.0",
+]
