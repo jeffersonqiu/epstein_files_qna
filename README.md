@@ -1,6 +1,6 @@
 # Epstein Files Q&A
 
-A simple end-to-end **Retrieval-Augmented Generation (RAG)** example built on a real-world dataset: the [DOJ Epstein disclosure documents](https://www.justice.gov/epstein/doj-disclosures/data-set-12-files). Ask multi-round questions against ~48 declassified PDFs entirely on your local machine — no cloud LLM calls, no data leaving your device.
+A simple end-to-end **Retrieval-Augmented Generation (RAG)** example built on a real-world dataset: the [DOJ Epstein disclosure documents](https://www.justice.gov/epstein/doj-disclosures/data-set-12-files). Ask multi-round questions against declassified PDFs entirely on your local machine — no cloud LLM calls, no data leaving your device.
 
 ## Objective
 
@@ -101,7 +101,7 @@ EOF
 uv run python src/download.py
 ```
 
-A browser window will open. If an age-verification prompt appears, click **Yes**. Once the document listing is visible, press **Enter** in the terminal. The script will then scrape all pages and download ~48 PDFs into `./data/`.
+A browser window will open. If an age-verification prompt appears, click **Yes**. Once the document listing is visible, press **Enter** in the terminal. The script will then scrape all pages and download PDFs into `./data/`.
 
 > PDFs are gitignored and must be downloaded locally by each user.
 
